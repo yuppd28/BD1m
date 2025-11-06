@@ -91,7 +91,6 @@ class HashFile:
         # 1 — зайнято; 0 — порожньо або tombstone
         return [1 if (s is not EMPTY and s is not TOMBSTONE) else 0 for s in self.slots]
 
-    # --- Зони щільного заповнення ---
     def dense_zones_by_runs(self, min_run: int = 20) -> List[Tuple[int, int, int]]:
         occ = self.occupancy_array()
         zones: List[Tuple[int, int, int]] = []
@@ -300,3 +299,4 @@ if st.button("Виконати аналіз", type="primary"):
             st.dataframe(zwdf, use_container_width=True)
         else:
             st.info("За віконним критерієм зони не знайдені. Спробуйте зменшити поріг щільності або збільшити α.")
+
