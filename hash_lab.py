@@ -16,7 +16,7 @@ def hash_func(key: int, m: int = M) -> int:
 
 @dataclass
 class Flight:
-    flight_id: int  # ключ
+    flight_id: int  
     route: str
     dep_time: str
     airline_id: int
@@ -55,7 +55,7 @@ class HashFile:
     def __init__(self, m: int = M):
         self.m = m
         self.slots: List[Any] = [EMPTY] * m
-        self.count = 0  # кількість активних записів
+        self.count = 0 
 
     def load_factor(self) -> float:
         return self.count / self.m
@@ -182,7 +182,7 @@ def parse_and_execute(commands_path: str, hf: HashFile) -> Dict[str, Any]:
 
             if cmd in {"insert", "ins"}:
                 try:
-                    rec = Flight.from_insert_fields(parts[1:8])  # включно з key у parts[1]
+                    rec = Flight.from_insert_fields(parts[1:8])  
                 except Exception as e:
                     ops_log.append({"line": lineno, "error": f"INSERT parse: {e}"})
                     continue
@@ -206,7 +206,6 @@ def parse_and_execute(commands_path: str, hf: HashFile) -> Dict[str, Any]:
     }
 
 
-# ---- CLI ----
 def main():
     parser = argparse.ArgumentParser(description="Hash-file lab runner (Flights domain)")
     parser.add_argument("--commands", required=True, help="Path to commands .txt")
@@ -243,7 +242,7 @@ def main():
         plt.title("Occupancy by slot index (1=occupied, 0=empty/tombstone)")
         plt.xlabel("Slot index")
         plt.ylabel("Occupied?")
-        # підсвічуємо зони за run-based критерієм
+   
         for a, b, _ in zones_runs:
             plt.axvspan(a, b, alpha=0.2)
         plt.tight_layout()
@@ -252,3 +251,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
